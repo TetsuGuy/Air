@@ -1,0 +1,24 @@
+{
+  "name": "air",
+  "version": "1.0.0",
+  "description": "lightweight utilities",
+  "main": "air.css",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TetsuGuy/Air.git"
+  },
+  "keywords": [
+    "css",
+    "style",
+    "utility"
+  ],
+  "author": "r.h.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TetsuGuy/Air/issues"
+  },
+  "homepage": "https://github.com/TetsuGuy/Air#readme"
+}
