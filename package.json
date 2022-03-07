@@ -1,6 +1,6 @@
 {
-  "name": "air",
-  "version": "1.0.0",
+  "name": "aircss",
+  "version": "1.0.1",
   "description": "lightweight utilities",
   "main": "air.css",
   "scripts": {
