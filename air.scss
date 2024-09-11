@@ -261,6 +261,9 @@ $positions: (
 
 // border helpers (b-l-none, b-l, etc.)
  @each $position in $positions {
+	$posKey: nth($position, 1);
+    	$posValues: nth($position, 2);
+	 
 	.#{$borderKey}#{$separator}#{$posKey} {
       		@each $posValue in $posValues {
         		border-#{$posValue}: $border-width solid $border-color !important;
