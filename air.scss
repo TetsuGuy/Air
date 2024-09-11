@@ -1,0 +1,456 @@
+$color-primary: #007BFF;
+$border-width: 1px;
+$border-color: lightgray;
+
+// height helpers
+.h-100 {
+	height: 100%;
+}
+.h-100i {
+  	height: 100% !important;
+}
+.h-100vh {
+  	height: 100vh;
+}
+.h-inherit {
+  	height: inherit;
+}
+
+// width helpers
+.w-100 {
+	width: 100%;
+}
+.w-100i {
+  	width: 100% !important;
+}
+.w-50 {
+  	width: 50%;
+}
+.w-50i {
+  	width: 50% !important;
+}
+.w-fc {
+  	width: fit-content;
+}
+.w-100vw {
+	width: 100vw;
+}
+
+// flexbox helpers
+.flex {
+	display: flex;
+}
+.flex-col {
+	flex-direction: column;
+}
+.flex-1 {
+  	flex: 1;
+}
+.flex-none {
+  	flex: none;
+}
+.flex-wrap {
+  	flex-wrap: wrap;
+}
+.flex-end {
+  	justify-content: flex-end;
+}
+.flex-space-between {
+  	justify-content: space-between;
+}
+.flex-center {
+  	justify-content: center;
+}
+.is-inline-flex {
+  	display: inline-flex;
+}
+.is-flex-centered {
+  	align-items: center;
+	display: flex;
+}
+
+// position helpers
+.position-relative {
+  position: relative;
+}
+.position-absolute {
+  position: absolute;
+}
+.position-fixed {
+  position: fixed;
+}
+// generator for position absolute + corners (left:0; top:0 => "position-absolute-tl")
+$edges: (
+  ('tr', ('top', 'right')),
+  ('tl', ('bottom', 'left')),
+  ('br', ('bottom', 'right')),
+  ('bl', ('bottom', 'left'))
+);
+
+@each $edge in $edges {
+  .position-absolute-#{nth($edge, 1)} {
+    position: absolute;
+
+    @each $edgeValue in nth($edge, 2) {
+      #{$edgeValue}: 0;
+    }
+  }
+}
+
+
+// overflow helpers
+.overflow-auto {
+ 	overflow: auto;
+}
+.overflow-hidden {
+  	overflow: hidden;
+}
+.overflow-ellipsis {
+  	overflow: hidden;
+  	text-overflow: ellipsis;
+}
+.overflow-y-auto {
+  	overflow-x: hidden;
+  	overflow-y: auto;
+}
+
+.allow-linebreaks {
+  	white-space: pre-line;
+}
+
+// Font Helpers
+.fs-small {
+  font-size: small;
+}
+
+.fs-smaller {
+  font-size: smaller;
+}
+
+.fs-custom-medium {
+  font-size: 15px;
+}
+
+.fs-larger {
+  font-size: larger;
+}
+
+.fs-large {
+  font-size: large;
+}
+
+.has-text-underlined {
+  text-decoration: underline;
+}
+
+.no-wrap {
+  white-space: nowrap;
+}
+
+// misc helpers
+.centered {
+	text-align: center;
+}
+.display-none {
+	display: none;
+}
+.no-pointer-events {
+  	pointer-events: none;
+}
+.chainable {
+  	margin-left: -#{$border-width};
+}
+.explicit-line-height {
+  line-height: 36px !important;
+}
+.no-outline {
+  outline: none;
+}
+.unselectable {
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+}
+
+// styling for clickable text that act as links
+.linkish {
+  cursor: pointer;
+  color: blue;
+  font-weight: bold;
+  -moz-text-decoration-line: underline;
+  text-decoration-line: underline;
+}
+
+// restricts content to be 1-5 lines long text and truncates it with ...
+@each $lines in (1, 2, 3, 4, 5) {
+  .max-#{$lines}-lines {
+    display: -webkit-box;
+    overflow-y: hidden;
+    -webkit-line-clamp: #{$lines};
+    -webkit-box-orient: vertical;
+  }
+}
+
+//margin and padding helpers
+$sizeUnit: rem;
+$marginKey: 'm';
+$widthKey: 'w';
+$paddingKey: 'p';
+$borderKey: 'b';
+$separator: '-';
+$none: 'none';
+$sizes: (
+  ('auto', 0),
+  ('none', 0),
+  ('xxs', 0.125),
+  ('xs', 0.25),
+  ('sm', 0.5),
+  ('md', 1),
+  ('lg', 2),
+  ('xl', 4),
+  ('xxl', 8),
+);
+$positions: (
+  ('t', 'top'),
+  ('r', 'right'),
+  ('b', 'bottom'),
+  ('l', 'left'),
+  ('x', ('left', 'right')),
+  ('y', ('top', 'bottom'))
+);
+
+@function sizeValue($key, $value) {
+  @return if($key =='auto', auto, if($key =='none', 0, $value + $sizeUnit));
+}
+
+@each $size in $sizes {
+  $sizeKey: nth($size, 1);
+  $sizeValue: nth($size, 2);
+
+  .#{$marginKey}#{$separator}#{$sizeKey} {
+    margin: sizeValue($sizeKey, $sizeValue) !important;
+  }
+
+  .#{$paddingKey}#{$separator}#{$sizeKey} {
+    padding: sizeValue($sizeKey, $sizeValue) !important;
+  }
+
+  .#{$widthKey}#{$separator}#{$sizeKey} {
+    min-width: sizeValue($sizeKey, $sizeValue) !important;
+    width: sizeValue($sizeKey, $sizeValue) !important;
+  }
+
+  @each $position in $positions {
+    $posKey: nth($position, 1);
+    $posValues: nth($position, 2);
+
+    .#{$marginKey}#{$separator}#{$posKey}#{$separator}#{$sizeKey} {
+      @each $posValue in $posValues {
+        margin-#{$posValue}: sizeValue($sizeKey, $sizeValue) !important;
+      }
+    }
+
+    .#{$paddingKey}#{$separator}#{$posKey}#{$separator}#{$sizeKey} {
+      @each $posValue in $posValues {
+        padding-#{$posValue}: sizeValue($sizeKey, $sizeValue) !important;
+      }
+    }
+  }
+}
+
+// border helpers (b-l-none, b-l, etc.)
+ @each $position in $positions {
+	.#{$borderKey}#{$separator}#{$posKey} {
+      		@each $posValue in $posValues {
+        		border-#{$posValue}: $border-width solid $border-color !important;
+      		}
+    	}
+	.#{$borderKey}#{$separator}#{$posKey}#{$separator}#{none} {
+		@each $posValue in $posValues {
+			border-#{$posValue}: none !important;
+		}
+	}
+ }
+.is-bordered {
+  border: 1px solid $border-color !important;
+}
+
+.is-round {
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+}
+
+.is-angular {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+}
+
+.border-none {
+  border: none;
+}
+
+//Opacity Helper
+$opacities: (
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10
+);
+
+$opacityKey: 'op';
+
+@each $opacity in $opacities {
+  .#{$opacityKey}#{$separator}#{$opacity} {
+    opacity: $opacity*0.1 !important;
+  }
+}
+
+// transparency helpers
+.color-transparent {
+  color: transparent;
+}
+
+.border-transparent {
+  border: 1px solid transparent;
+}
+
+.bg-transparent {
+  background: transparent;
+}
+
+// applies a color-filter to any element (the desired color is the parameter)
+// https://stackoverflow.com/questions/42966641/how-to-transform-black-into-any-given-color-using-only-css-filters/43960991#43960991
+@mixin recolor($color: #000, $opacity: 1) {
+  $r: red($color) / 255;
+  $g: green($color) / 255;
+  $b: blue($color) / 255;
+  $a: $opacity;
+  $svg-filter-id: "recolor";
+  filter: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="#{$svg-filter-id}" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0 0 0 0 #{$r} 0 0 0 0 #{$g} 0 0 0 0 #{$b} 0 0 0 #{$a} 0"/></filter></svg>##{$svg-filter-id}');
+}
+
+.color-primary {
+  color: $color-primary;
+}
+
+.color-primary-all {
+  @include recolor($color-primary)
+}
+
+
+// transform helpers
+@each $angle in (0, 90, 180, 270) {
+  .rotate-#{$angle} {
+    transform: rotate(#{$angle}deg);
+  }
+}
+.flip-vertical {
+  -webkit-transform: scale(1, -1);
+  transform: scale(1, -1);
+}
+
+
+.disabled {
+  opacity: 0.38; // don't use % notation, because it breaks (=1%)
+  filter: grayscale(1);
+  pointer-events: none;
+}
+
+.dot-loading:after {
+  display: inline-block;
+  animation: dotty steps(1, end) 2.5s infinite;
+  content: "";
+}
+
+// Addes a "..." loading animation to an element
+@keyframes dotty {
+  0% {
+    content: "";
+  }
+
+  25% {
+    content: ".";
+  }
+
+  50% {
+    content: "..";
+  }
+
+  75% {
+    content: "...";
+  }
+
+  100% {
+    content: "";
+  }
+}
+
+// simple opacity fade-out
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+// Use this class to shake a component, such as when a form throws an error.
+.error-rumble {
+  animation: shake 0.2s ease-in-out 0s 2;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0rem);
+  }
+
+  25% {
+    transform: translateX(0.08rem);
+  }
+
+  75% {
+    transform: translateX(-0.08rem);
+  }
+
+  100% {
+    transform: translateX(0rem);
+  }
+}
+
+// This class allows toggling between two labels based on a dynamic width breakpoint, which allows to display an
+// abbreviated label if there is not enough space for the full one, all without Javascript!
+// Usage: assign long label to "aria-label", short label to "data-short", and override breakpoint "--squish-at"
+// Taken (and slightly modified) from https://joyheron.com/css-content-breakpoints
+.squishable {
+  overflow: hidden;
+  white-space: nowrap;
+  --squish-at: 120px;
+}
+
+.squishable::before,
+.squishable::after {
+  display: inline-block;
+  overflow: hidden;
+}
+
+.squishable::before {
+  content: attr(data-short);
+  max-width: calc((var(--squish-at) - 100%) * 10000);
+}
+
+.squishable::after {
+  content: attr(aria-label);
+  max-width: calc((100% - var(--squish-at)) * 10000);
+}
