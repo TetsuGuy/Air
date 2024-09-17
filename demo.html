@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCSS/CSS Library Demo</title>
+    <link rel="stylesheet" href="path/to/your/css/library.css"> <!-- Replace with your actual library path -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .demo-section {
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid lightgray;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header class="h-100vh flex flex-center flex-col color-primary">
+        <h1 class="fs-large is-flex-centered">Welcome to My SCSS/CSS Library Demo</h1>
+        <p class="fs-custom-medium">Showcasing a variety of styles and helpers</p>
+    </header>
+
+    <!-- Width and Height Helpers Section -->
+    <section class="demo-section">
+        <h2 class="fs-large">Width and Height Helpers</h2>
+        <div class="w-50 h-100 flex-center" style="background-color: #f0f0f0; border: 1px solid #ddd;">
+            <p class="centered">This box is 50% width and 100% height of its container.</p>
+        </div>
+    </section>
+
+    <!-- Flexbox Helpers Section -->
+    <section class="demo-section">
+        <h2 class="fs-large">Flexbox Helpers</h2>
+        <div class="flex flex-space-between">
+            <div class="w-50 is-bordered p-md">Item 1</div>
+            <div class="w-50 is-bordered p-md">Item 2</div>
+        </div>
+    </section>
+
+    <!-- Font and Text Helpers Section -->
+    <section class="demo-section">
+        <h2 class="fs-large">Font and Text Helpers</h2>
+        <p class="fs-small">This is a small text.</p>
+        <p class="fs-larger has-text-underlined">This is a larger text with underline.</p>
+        <p class="fs-large no-wrap">This is a large text with no wrapping.</p>
+    </section>
+
+    <!-- Position Helpers Section -->
+    <section class="demo-section position-relative" style="height: 200px;">
+        <h2 class="fs-large">Position Helpers</h2>
+        <div class="position-absolute-tr p-sm color-primary">Top Right</div>
+        <div class="position-absolute-bl p-sm color-primary">Bottom Left</div>
+    </section>
+
+    <!-- Overflow and Miscellaneous Helpers Section -->
+    <section class="demo-section">
+        <h2 class="fs-large">Overflow and Miscellaneous Helpers</h2>
+        <div class="w-50 overflow-hidden" style="border: 1px solid #ddd;">
+            <p>This content is too long and will be clipped if it overflows the container. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+        <button class="linkish mt-md">Clickable Text</button>
+    </section>
+
+</body>
+</html>
